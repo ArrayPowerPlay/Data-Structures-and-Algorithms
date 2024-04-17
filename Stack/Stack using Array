@@ -45,7 +45,7 @@ int size() {
 }
 
 void printStack() {
-    // print all elements in a stack
+    // print all elements in a stack from top to bot
     if(isEmpty()) printf("Stack is empty. There is nothing to print!\n");
     else {
         int key = top;
