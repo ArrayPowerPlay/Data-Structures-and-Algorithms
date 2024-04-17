@@ -6,7 +6,7 @@ const int STACK_CAPACITY = 10;
 // top is the index of the top element of stack
 int top = -1;
 
-int stack[];
+int *stack;
 
 int isFull() {
     // check if stack is full or not
@@ -57,7 +57,7 @@ void printStack() {
 }
 
 int main() {
-    stack[STACK_CAPACITY];
+    stack = (int *) malloc (STACK_CAPACITY * sizeof(int));
     push(5);
     return 0;
   
