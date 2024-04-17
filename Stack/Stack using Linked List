@@ -7,9 +7,11 @@ typedef struct node {
     struct node *next;
 } node;
 
+// the element at the top of the stack
 node *top = NULL;
 
 node *makenode(char v) {
+// make a new pointer to a new node
     node *p = (node *) malloc (sizeof(node));
     p->value = v;
     p->next = NULL;
@@ -17,6 +19,7 @@ node *makenode(char v) {
 }
 
 char pop() {
+// return the value of top and remove this element out of stack
     node *p = top;
     char c = p->value;
     top = top->next;
@@ -25,16 +28,19 @@ char pop() {
 }
 
 int isEmpty() {
+// check if stack is empty or not
     return top == NULL;
 }
 
 void push(char c) {
+// push a new node on top of stack
     node *p = makenode(c);
     p->next = top;
     top = p;
 }
 
 int compare(char a, char b) {
+// compare if the open and close characters are compatible or not
     if (a == '{' && b == '}') return 1;
     if (a == '(' && b == ')') return 1;
     if (a == '[' && b == ']') return 1;
@@ -42,6 +48,7 @@ int compare(char a, char b) {
 }
 
 int check(char *s) {
+// check if the arrangement given is correct or incorrect
     for (int i = 0; i < strlen(s); i++) {
         if(s[i] == '{' || s[i] == '[' || s[i] == '(') push(s[i]);
         else {
