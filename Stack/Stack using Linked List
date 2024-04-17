@@ -10,6 +10,11 @@ typedef struct node {
 // the element at the top of the stack
 node *top = NULL;
 
+int isEmpty() {
+// check if stack is empty or not
+    return top == NULL;
+}
+
 node *makenode(char v) {
 // make a new pointer to a new node
     node *p = (node *) malloc (sizeof(node));
@@ -18,18 +23,26 @@ node *makenode(char v) {
     return p;
 }
 
-char pop() {
-// return the value of top and remove this element out of stack
-    node *p = top;
-    char c = p->value;
-    top = top->next;
-    free(p);
-    return c;
+void pop() {
+// remove the top node out of stack
+    if(isEmpty()) printf("Stack is empty. There is nothing to pop!\n");
+    else {
+        node *p = top;
+        char c = p->value;
+        top = top->next;
+        free(p);
+    }
 }
 
-int isEmpty() {
-// check if stack is empty or not
-    return top == NULL;
+void printStack() {
+    if(isEmpty()) printf("Stack is empty\n");
+    else {
+        node *p = top;
+        while(p != NULL) {
+            printf("%c", p->value);
+            p = p->next;
+        }
+    }
 }
 
 void push(char c) {
@@ -54,7 +67,8 @@ int check(char *s) {
         else {
             if (isEmpty()) return 0;
             else {
-                char c = pop();
+                char c = top->value;
+                pop();
                 int v = compare(c, s[i]);
                 if (v == 0) return 0;
             }
@@ -68,6 +82,6 @@ int main()
     char s[10000];
     scanf("%s", s);
     int key = check(s);
-    printf("%d", key);
+    printf("%d\n", key);
     return 0;
 }
