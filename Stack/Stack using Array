@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+const int STACK_CAPACITY = 10;
+// initiate top = -1 when stack is empty
+// top is the index of the top element of stack
+int top = -1;
+
+int stack[];
+
+int isFull() {
+    // check if stack is full or not
+    return top == STACK_CAPACITY - 1;
+}
+
+int isEmpty() {
+    return top == -1;
+}
+
+void push(int v) {
+    // push a new element on top of stack
+    if(isFull()) printf("Stack is full. Can't be addded more\n");
+    else {
+        top++;
+        stack[top] = v;
+    }
+}
+
+void pop() {
+    // remove top element of stack
+    if(isEmpty()) printf("Stack is empty. Can't be pop anymore\n");
+    else {
+        top--;
+    }
+}
+
+int gettop() {
+    // return the top element of stack
+    return stack[top];
+}
+
+int size() {
+    // size of stack
+    return top + 1;
+}
+
+void printStack() {
+    // print all elements in a stack
+    if(isEmpty()) printf("Stack is empty. There is nothing to print!\n");
+    else {
+        int key = top;
+        while(key != -1) {
+            printf("%d ", stack[key]);
+            key--;
+        }
+    }
+}
+
+int main() {
+    stack[STACK_CAPACITY];
+    push(5);
+    return 0;
+  
+}
