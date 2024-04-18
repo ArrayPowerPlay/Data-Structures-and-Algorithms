@@ -5,11 +5,13 @@
 
 int a[MAX_SIZE];
 int n;
+int count = 1;
 
 void Try(int k) {
     for(int v = 0; v <= 1; v++) {
         a[k] = v;
         if(k == n) {
+            printf("Cau hinh %d: ", count++);
             for (int i = 1; i <= n; i++) printf("%d", a[i]);
             printf("\n");
         }
