@@ -59,9 +59,9 @@ the first one is city 1 */
         }
     }
     for (int i = 2; i <= n; i++) visited[i] = 0;
-    printf("The minimum cost of the journey is: %d\n", f);
     // the first city is determined so we start from the second one
     Try(2);
+    printf("The minimum cost of the journey is: %d\n", f);
     printf("The most effective journey: ");
     for (int i = 1; i <= n; i++) printf("%d->", track[i]);
     printf("%d", track[1]);
