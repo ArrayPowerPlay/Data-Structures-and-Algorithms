@@ -33,6 +33,18 @@ void push(int v) {
     }
 }
 
+int get_front() {
+    // return the first element of queue
+    if(isEmpty()) return INT_MIN;
+    else return queue[front];
+}
+
+int get_rear() {
+    // return the last element of queue
+    if(isEmpty()) return INT_MIN;
+    else return queue[rear - 1];
+}
+
 int pop() {
     // remove the first element of queue and return its value
     if(isEmpty()) {
