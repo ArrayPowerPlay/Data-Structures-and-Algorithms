@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#define MAX_SIZE 1000
+// solve the traveler problem
+
+// cost when travel from one city to another
+int cost[MAX_SIZE][MAX_SIZE];
+// check if one city has been traveled or not
+int visited[MAX_SIZE];
+// track the journey of the traveler
+int map[MAX_SIZE];
+// track the most effective journey of the traveler
+int track[MAX_SIZE];
+// min cost of the journey
+int min;
+// lower bound of minimum cost
+int f = INT_MAX;
+// min cost of all n cities
+int min_city = INT_MAX;
+int n;
+// Branch and Bound Algorithm
+void Try(int k) {
+    for (int v = 1; v <= n; v++) {
+        if(visited[v] == 0) {
+            map[k] = v;
+            visited[v] = 1;
+            min += cost[map[k - 1]][map[k]];
+            if (k == n) {
+                int t = min + cost[map[n]][1];
+                if (t < f) {
+                    f = t;
+                    for (int i = 1; i <= n; i++) track[i] = map[i];
+                }
+            }
+            else {
+                int g = min + (n - k + 1) * min_city;
+                if (g < f) Try(k + 1);
+            }
+            min -= cost[map[k - 1]][map[k]];
+            visited[v] = 0;
+        }
+    }
+}
+
+int main()
+{
+    /* which city to start the journey is not important so we assume 
+the first one is city 1 */
+    map[1] = 1;
+    min = 0;
+    visited[1] = 1;
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            scanf("%d", &cost[i][j]);
+            if (cost[i][j] < min_city && cost[i][j] > 0) min_city = cost[i][j];
+        }
+    }
+    for (int i = 2; i <= n; i++) visited[i] = 0;
+    printf("The minimum cost of the journey is: %d\n", f);
+    // the first city is determined so we start from the second one
+    Try(2);
+    printf("The most effective journey: ");
+    for (int i = 1; i <= n; i++) printf("%d->", track[i]);
+    printf("%d", track[1]);
+    return 0;
+}
