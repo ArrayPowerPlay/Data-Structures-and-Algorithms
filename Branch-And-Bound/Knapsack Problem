@@ -3,6 +3,7 @@
 #include <limits.h>
 #define MAX 100000
 
+// the maximum weight that cannot be exceeded
 int max_weight;
 // number of knapsacks
 int n;
@@ -36,7 +37,7 @@ void Try(int k) {
             }
         }
         else {
-            f = current_value + ((float)(weight_left / b[k + 1])) * a[k + 1];
+            f = current_value + ((float)weight_left / b[k + 1]) * a[k + 1];
             if (f > f_max) Try(k + 1);
         } 
         weight_left += b[k] * v;
@@ -47,7 +48,7 @@ void Try(int k) {
 int main()
 {
     scanf("%d", &n);
-    printf("Enter values of each knapsack: ");
+    printf("Enter values of each knapsack: "); 
     for (int i = 1; i <= n; i++) scanf("%d", &a[i]);
     printf("Enter weight of each knapsack: ");
     for (int i = 1; i <= n; i++) scanf("%d", &b[i]);
