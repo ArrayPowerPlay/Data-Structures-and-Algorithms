@@ -1,17 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void swap(int &a, int &b) {
+    int c;
+    c = a;
+    a = b;
+    b = c;
+}
+
 void selection_sort(int arr[], int n) {
     for (int i = 0; i < n - 1; i++) {
         int index = i;
         for (int j = i + 1; j < n; j++) {
-            if (arr[j] < arr[index]) index = j;
+            if (arr[index] > arr[j]) index = j;
         }
-        if (index != i) {
-            int tmp = arr[i];
-            arr[i] = arr[index];
-            arr[index] = tmp;
+        if (index != i) swap(arr[index], arr[i]);
+    }
+}
+
+void selection_sort_ver2(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int index = i;
+        int check = 0;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[index] > arr[j]) index = j;
+            if (j < n - 1 && arr[j] > arr[j + 1]) check++;
         }
+        if (index != i) swap(arr[index], arr[i]);
+        else if (check == 0) return;
     }
 }
 
